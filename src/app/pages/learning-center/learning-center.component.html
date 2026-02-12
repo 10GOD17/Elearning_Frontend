@@ -1,0 +1,77 @@
+<div class="learning-center">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title"><i class="pi pi-book"></i> Centro de Aprendizaje</h1>
+      <p class="page-sub">Explora el catálogo de cursos y formaciones disponibles</p>
+    </div>
+    <div class="search-wrap">
+      <i class="pi pi-search search-icon"></i>
+      <input
+        class="search-input"
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+        placeholder="Buscar cursos..."
+      />
+    </div>
+  </div>
+
+  <div class="categories-bar">
+    @for (cat of categories; track cat) {
+      <button
+        class="cat-btn"
+        [class.active]="activeCategory() === cat"
+        (click)="setCategory(cat)"
+      >{{ cat }}</button>
+    }
+  </div>
+
+  <div class="courses-grid">
+    @for (course of filteredCourses; track course.id) {
+      <div class="course-card">
+        <div class="course-card-header" [style.background]="course.color + '15'">
+          <div class="course-icon-wrap" [style.background]="course.color + '25'" [style.color]="course.color">
+            <i [class]="course.icon"></i>
+          </div>
+          @if (course.isNew) {
+            <div class="new-badge">Nuevo</div>
+          }
+          @if (course.progress === 100) {
+            <div class="completed-badge"><i class="pi pi-check-circle"></i> Completado</div>
+          }
+        </div>
+        <div class="course-card-body">
+          <div class="course-meta">
+            <span class="course-category-tag">{{ course.category }}</span>
+            <p-tag [severity]="getLevelSeverity(course.level)" [value]="course.level" [rounded]="true"></p-tag>
+          </div>
+          <h4 class="course-title">{{ course.title }}</h4>
+          <p class="course-desc">{{ course.description }}</p>
+          <div class="course-info">
+            <span><i class="pi pi-clock"></i> {{ course.duration }}</span>
+            <span><i class="pi pi-user"></i> {{ course.instructor }}</span>
+          </div>
+          @if (course.enrolled && course.progress > 0 && course.progress < 100) {
+            <div class="course-progress">
+              <div class="progress-header">
+                <span>Progreso</span>
+                <span>{{ course.progress }}%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" [style.width.%]="course.progress" [style.background]="course.color"></div>
+              </div>
+            </div>
+          }
+          <div class="course-actions">
+            @if (!course.enrolled) {
+              <button class="btn-enroll">Inscribirme</button>
+            } @else if (course.progress === 100) {
+              <button class="btn-certificate"><i class="pi pi-download"></i> Certificado</button>
+            } @else {
+              <button class="btn-continue" [style.background]="course.color">Continuar</button>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

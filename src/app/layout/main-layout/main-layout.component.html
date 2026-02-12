@@ -1,0 +1,24 @@
+<div class="layout-wrapper">
+  <app-sidebar
+    [isOpen]="sidebarOpen()"
+    (closeSidebar)="sidebarOpen.set(false)"
+  ></app-sidebar>
+
+  <div class="main-content">
+    <!-- Mobile Topbar -->
+    <header class="mobile-topbar">
+      <button class="hamburger-btn" (click)="toggleSidebar()">
+        <i class="pi pi-bars"></i>
+      </button>
+      <div class="topbar-logo">
+        <div class="topbar-logo-icon"><span>CH</span></div>
+        <span class="topbar-title">Capital Humano</span>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

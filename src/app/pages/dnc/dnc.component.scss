@@ -1,0 +1,219 @@
+$primary: #9D2226;
+
+.dnc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1400px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  i { color: $primary; font-size: 1.3rem; }
+}
+
+.page-sub { margin: 0; font-size: 0.85rem; color: #6b7280; }
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-export, .btn-primary {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s;
+  border: none;
+}
+
+.btn-export {
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  color: #374151;
+  &:hover { border-color: #9ca3af; }
+}
+
+.btn-primary {
+  background: $primary;
+  color: white;
+  &:hover { background: #7a1a1d; }
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+
+  @media (min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.summary-card {
+  background: white;
+  border: 1.5px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.summary-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  @media (min-width: 1024px) { grid-template-columns: 1fr 1.5fr; }
+}
+
+.widget {
+  background: white;
+  border-radius: 18px;
+  border: 1.5px solid #f3f4f6;
+  padding: 1.25rem;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+  i { font-size: 0.9rem; color: $primary; }
+}
+
+.dnc-table {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  th {
+    text-align: left;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1.5px solid #f3f4f6;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f9fafb;
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+}
+
+.area-name { font-weight: 600; color: #111827; }
+.center-text { text-align: center; color: #4b5563; }
+
+.brechas-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #374151;
+  font-weight: 700;
+  font-size: 0.78rem;
+
+  &.high { background: #fef2f2; color: #9D2226; }
+}
+
+.cobertura-cell { display: flex; align-items: center; gap: 0.6rem; }
+
+.cobertura-pct {
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.82rem;
+  min-width: 36px;
+}
+
+.mini-progress {
+  flex: 1;
+  height: 5px;
+  background: #f3f4f6;
+  border-radius: 100px;
+  overflow: hidden;
+  min-width: 50px;
+}
+
+.mini-fill {
+  height: 100%;
+  border-radius: 100px;
+  &.high-cov { background: #22c55e; }
+  &.mid-cov { background: #f59e0b; }
+  &.low-cov { background: #ef4444; }
+}

@@ -1,0 +1,83 @@
+<div class="dnc-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title"><i class="pi pi-chart-bar"></i> Gestión DNC</h1>
+      <p class="page-sub">Detección de Necesidades de Capacitación — Vista {{ authService.getRoleLabel() }}</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-export"><i class="pi pi-download"></i> Exportar</button>
+      <button class="btn-primary"><i class="pi pi-plus"></i> Nueva DNC</button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <div class="summary-card" style="--color:#9D2226">
+      <div class="summary-icon" style="background:#FFF1F1;color:#9D2226"><i class="pi pi-users"></i></div>
+      <div><div class="summary-value">292</div><div class="summary-label">Colaboradores Evaluados</div></div>
+    </div>
+    <div class="summary-card" style="--color:#f59e0b">
+      <div class="summary-icon" style="background:#FFFBEB;color:#f59e0b"><i class="pi pi-exclamation-triangle"></i></div>
+      <div><div class="summary-value">34</div><div class="summary-label">Brechas Identificadas</div></div>
+    </div>
+    <div class="summary-card" style="--color:#22c55e">
+      <div class="summary-icon" style="background:#F0FDF4;color:#22c55e"><i class="pi pi-check-circle"></i></div>
+      <div><div class="summary-value">82%</div><div class="summary-label">Cobertura Promedio</div></div>
+    </div>
+    <div class="summary-card" style="--color:#4F7CAC">
+      <div class="summary-icon" style="background:#EFF6FF;color:#4F7CAC"><i class="pi pi-calendar"></i></div>
+      <div><div class="summary-value">Q1 2025</div><div class="summary-label">Período Activo</div></div>
+    </div>
+  </div>
+
+  <!-- Chart + Table -->
+  <div class="main-grid">
+    <div class="widget">
+      <div class="widget-header">
+        <h3 class="widget-title"><i class="pi pi-chart-bar"></i> Cobertura por Área</h3>
+      </div>
+      <p-chart type="bar" [data]="chartData" [options]="chartOptions" height="240"></p-chart>
+    </div>
+
+    <div class="widget">
+      <div class="widget-header">
+        <h3 class="widget-title"><i class="pi pi-list"></i> Detalle por Área</h3>
+      </div>
+      <div class="dnc-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Área</th>
+              <th>Colab.</th>
+              <th>Brechas</th>
+              <th>Cobertura</th>
+              <th>Prioridad</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of dncItems; track item.area) {
+              <tr>
+                <td class="area-name">{{ item.area }}</td>
+                <td class="center-text">{{ item.colaboradores }}</td>
+                <td class="center-text">
+                  <span class="brechas-badge" [class.high]="item.brechas > 8">{{ item.brechas }}</span>
+                </td>
+                <td>
+                  <div class="cobertura-cell">
+                    <span class="cobertura-pct">{{ item.cobertura }}%</span>
+                    <div class="mini-progress">
+                      <div class="mini-fill" [style.width.%]="item.cobertura" [class.high-cov]="item.cobertura >= 90" [class.mid-cov]="item.cobertura >= 70 && item.cobertura < 90" [class.low-cov]="item.cobertura < 70"></div>
+                    </div>
+                  </div>
+                </td>
+                <td><p-tag [severity]="getPrioridadSeverity(item.prioridad)" [value]="item.prioridad" [rounded]="true"></p-tag></td>
+                <td><p-tag [severity]="getEstadoSeverity(item.estado)" [value]="item.estado" [rounded]="true"></p-tag></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<!-- Mobile Overlay -->
+<div
+  class="sidebar-overlay"
+  [class.visible]="isOpen"
+  (click)="closeSidebar.emit()"
+></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" [class.open]="isOpen">
+
+  <!-- Logo Header -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <span>CH</span>
+      </div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-company">SalfaCorp</span>
+        <span class="sidebar-logo-dept">Capital Humano</span>
+      </div>
+    </div>
+    <button class="sidebar-close-btn" (click)="closeSidebar.emit()">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+
+  <!-- User Badge -->
+  <div class="sidebar-user">
+    <div class="user-avatar">
+      <span>{{ authService.user()?.name?.charAt(0) }}</span>
+    </div>
+    <div class="user-info">
+      <span class="user-name">{{ authService.user()?.name }}</span>
+      <span class="user-role">{{ authService.getRoleLabel() }}</span>
+    </div>
+    <div class="user-status"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sidebar-nav">
+    <span class="nav-section-label">Menú Principal</span>
+    <ul class="nav-list">
+      @for (item of filteredNavItems; track item.route) {
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="isActive(item.route)"
+            (click)="navigate(item.route)"
+          >
+            <span class="nav-icon"><i [class]="item.icon"></i></span>
+            <span class="nav-label">{{ item.label }}</span>
+            @if (item.badge) {
+              <span class="nav-badge">{{ item.badge }}</span>
+            }
+          </button>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Bottom area -->
+  <div class="sidebar-bottom">
+    <button class="nav-link help-btn">
+      <span class="nav-icon"><i class="pi pi-question-circle"></i></span>
+      <span class="nav-label">Soporte</span>
+    </button>
+    <button class="nav-link logout-btn" (click)="logout()">
+      <span class="nav-icon"><i class="pi pi-sign-out"></i></span>
+      <span class="nav-label">Cerrar Sesión</span>
+    </button>
+    <div class="sidebar-footer">
+      Developed by <strong>Syntaxis</strong>
+    </div>
+  </div>
+
+</aside>
