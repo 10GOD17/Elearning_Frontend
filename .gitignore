@@ -1,0 +1,32 @@
+# Dependencias
+node_modules/
+
+# Build output
+dist/
+.angular/
+
+# Archivos de entorno (no commitear con secretos)
+src/environments/environment.ts
+src/environments/environment.prod.ts
+src/environments/environment.staging.ts
+!src/environments/environment.example.ts
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.suo
+
+# Tests
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
